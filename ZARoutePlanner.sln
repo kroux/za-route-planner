@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZARoutePlanner.Core", "ZARoutePlanner.Core\ZARoutePlanner.Core.csproj", "{326C1D3E-597C-484E-AED2-009A4CB9DCDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZARoutePlanner.Core.Test", "ZARoutePlanner.Core.Test\ZARoutePlanner.Core.Test.csproj", "{59C55D89-37D6-482A-A728-9EFC819FA0E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{326C1D3E-597C-484E-AED2-009A4CB9DCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326C1D3E-597C-484E-AED2-009A4CB9DCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326C1D3E-597C-484E-AED2-009A4CB9DCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326C1D3E-597C-484E-AED2-009A4CB9DCDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C55D89-37D6-482A-A728-9EFC819FA0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C55D89-37D6-482A-A728-9EFC819FA0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C55D89-37D6-482A-A728-9EFC819FA0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C55D89-37D6-482A-A728-9EFC819FA0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
