@@ -25,4 +25,10 @@
       <ProjectReference Include="..\ZARoutePlanner.Core\ZARoutePlanner.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Data\lines-1.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
