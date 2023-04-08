@@ -6,11 +6,10 @@ public class GraphBuilderTests
     public void GraphBuilder_BuildsCorrectGraph_ForLines1()
     {
         // Arrange
-        var filePath = Path.Combine("Data", "lines-1.json");
-        var fileText = File.ReadAllText(filePath);
+        var lines1Json = TestDataUtils.Lines1Json;
 
         // Act
-        var graph = GraphBuilder.FromJson(fileText);
+        var graph = GraphBuilder.FromJson(lines1Json);
 
         // Assert
         var stationANode = graph.GetNode("Station A");
@@ -25,7 +24,7 @@ public class GraphBuilderTests
         Assert.Equal("Station D", stationDNode.Name);
         Assert.Equal("Station E", stationENode.Name);
 
-        Assert.Equal(stationANode.Edges, new[] { new Edge(stationBNode, "Line A") });
+        Assert.Equal(stationANode.Edges, new[] { new Edge(stationBNode, "Line A"), new Edge(stationENode, "Line C") });
 
         Assert.Equal(stationBNode.Edges,
             new[]
@@ -37,6 +36,6 @@ public class GraphBuilderTests
 
         Assert.Equal(stationDNode.Edges, new[] { new Edge(stationBNode, "Line B"), new Edge(stationENode, "Line B") });
 
-        Assert.Equal(stationENode.Edges, new[] { new Edge(stationDNode, "Line B") });
+        Assert.Equal(stationENode.Edges, new[] { new Edge(stationDNode, "Line B"), new Edge(stationANode, "Line C") });
     }
 }

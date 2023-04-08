@@ -10,8 +10,6 @@ public static class GraphBuilder
 
         var graph = new Graph();
 
-        if (lineInfo == null) return graph;
-        
         foreach (var (lineName, stops) in lineInfo)
         {
             for (var i = 0; i < stops.Length; i++)
