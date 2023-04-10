@@ -2,7 +2,7 @@ namespace ZARoutePlanner.Core.Planner;
 
 public static class PlannerUtils
 {
-    public static Trip GetTrip(string start, string destination,
+    public static Trip? GetTrip(string start, string destination,
         Dictionary<string, List<(string sourceNode, string path)>> paths)
     {
         if (start == null) throw new ArgumentNullException(nameof(start));
@@ -33,8 +33,7 @@ public static class PlannerUtils
 
         while (currentRoutes != null)
         {
-            // Check if a path along the current route exists, otherwise just select the first option.
-            var (currentNode, currentDescription) = currentRoutes.FirstOrDefault(r => r.path == currentLine);
+            var (currentNode, currentDescription) = currentRoutes.First();
 
             if (currentLine != currentDescription)
             {
