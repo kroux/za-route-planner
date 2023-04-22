@@ -7,6 +7,8 @@ public class RoutesService
 {
     private const string LinesData = "Lines.json";
 
+    private readonly Graph _graph;
+
     private readonly BfsRoutePlanner _bfsRoutePlanner;
 
     public RoutesService(ILogger<RoutesService> logger)
@@ -15,9 +17,9 @@ public class RoutesService
         var linesDataJson = File.ReadAllText(LinesData);
 
         logger.LogInformation("Building graph");
-        var graph = GraphBuilder.FromJson(linesDataJson);
+        _graph = GraphBuilder.FromJson(linesDataJson);
 
-        _bfsRoutePlanner = new BfsRoutePlanner(graph);
+        _bfsRoutePlanner = new BfsRoutePlanner(_graph);
     }
 
     public Trip? GetRoutes(string start, string destination)
@@ -31,5 +33,13 @@ public class RoutesService
         var trip = PlannerUtils.GetTrip(start, destination, path);
 
         return trip;
+    }
+
+    public (bool, bool) ValidateNodesExist(string nodeName1, string nodeName2)
+    {
+        var nodeName1Exists = _graph.TryGetNode(nodeName1, out _);
+        var nodeName2Exists = _graph.TryGetNode(nodeName2, out _);
+
+        return (nodeName1Exists, nodeName2Exists);
     }
 }
