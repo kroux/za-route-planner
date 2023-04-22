@@ -12,7 +12,7 @@ public class Graph
             _nodes.Add(new Node(name));
         }
     }
-    
+
     public void AddEdge(string from, string to, string description)
     {
         var startNode = _nodes.First(n => n.Name == from);
@@ -24,5 +24,11 @@ public class Graph
     public Node GetNode(string name)
     {
         return _nodes.First(n => n.Name == name);
+    }
+
+    public bool TryGetNode(string name, out Node? node)
+    {
+        node = _nodes.FirstOrDefault(n => n.Name == name);
+        return !Equals(default(Node), node);
     }
 }
