@@ -6,11 +6,13 @@ import Alert from "../Alert";
 
 function RoutesSearch() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [hasError, setHasError] = useState(false);
   const [results, setResults] = useState<RouteSearchResultType[]>([]);
 
   async function handleSearch(from: string, to: string) {
     setLoading(true);
+    setError('');
     setHasError(false);
 
     try {
@@ -29,6 +31,12 @@ function RoutesSearch() {
           const elem = document.getElementById("routes-search-results");
           elem?.scrollIntoView({ behavior: "smooth" });
         }, 100);
+      } else if (result.status === 400) {
+        setLoading(false);
+        setHasError(true);
+
+        const response = await result.json();
+        setError(response.detail);
       } else {
         setLoading(false);
         setHasError(true);
@@ -46,7 +54,7 @@ function RoutesSearch() {
       <RoutesSearchForm onSearch={handleSearch} />
       {loading && <Spinner type="primary" />}
       {!loading && !hasError && <RoutesSearchResults results={results} />}
-      {hasError && <Alert type="danger" text="Something went wrong, please try again later." />}
+      {hasError && <Alert type="danger" text={error || "Something went wrong, please try again later."} />}
     </div>
   );
 }
