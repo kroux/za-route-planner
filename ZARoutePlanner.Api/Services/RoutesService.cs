@@ -5,21 +5,13 @@ namespace ZARoutePlanner.Api.Services;
 
 public class RoutesService
 {
-    private const string LinesData = "Lines.json";
-
     private readonly Graph _graph;
-
     private readonly BfsRoutePlanner _bfsRoutePlanner;
 
-    public RoutesService(ILogger<RoutesService> logger)
+    public RoutesService(Graph graph)
     {
-        logger.LogInformation("Loading data from {DataFile}", LinesData);
-        var linesDataJson = File.ReadAllText(LinesData);
-
-        logger.LogInformation("Building graph");
-        _graph = GraphBuilder.FromJson(linesDataJson);
-
-        _bfsRoutePlanner = new BfsRoutePlanner(_graph);
+        _graph = graph;
+        _bfsRoutePlanner = new BfsRoutePlanner(graph);
     }
 
     public Trip? GetRoutes(string start, string destination)
