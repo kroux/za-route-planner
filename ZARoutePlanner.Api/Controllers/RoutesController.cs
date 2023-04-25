@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ZARoutePlanner.Api.Services;
-using ZARoutePlanner.Core.Planner;
 
 namespace ZARoutePlanner.Api.Controllers;
 
@@ -20,21 +19,18 @@ public class RoutesController : ControllerBase
     {
         var (node1Exists, node2Exists) = _routesService.ValidateNodesExist(start, destination);
 
-        switch (node1Exists, node2Exists)
+        if (!node1Exists)
         {
-            case (false, false):
-                return Problem(title: "Stations not found",
-                    detail: $"The specified station {start} or {destination} were not found.",
-                    statusCode: StatusCodes.Status400BadRequest);
-            case (true, false):
-                return Problem(title: "Stations not found",
-                    detail: $"The specified station {destination} was not found.",
-                    statusCode: StatusCodes.Status400BadRequest);
-            case (false, true):
-                return Problem(title: "Stations not found",
-                    detail: $"The specified station {destination} was not found.",
-                    statusCode: StatusCodes.Status400BadRequest);
+            ModelState.AddModelError(nameof(start), $"The specified station '{start}' does not exist.");
         }
+
+        if (!node2Exists)
+        {
+            ModelState.AddModelError(nameof(destination), $"The specified station '{destination}' does not exist.");
+        }
+
+        if (!ModelState.IsValid)
+            return ValidationProblem(ModelState);
 
         var trip = _routesService.GetRoutes(start, destination);
         return Ok(trip);
