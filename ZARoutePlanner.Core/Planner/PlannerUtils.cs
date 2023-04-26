@@ -31,9 +31,20 @@ public static class PlannerUtils
 
         currentLegRoute.Add(destination);
 
+        string? currentDescription = null;
+
         while (currentRoutes != null)
         {
-            var (currentNode, currentDescription) = currentRoutes.First();
+            // Prefer paths that continue along the same line that we are already on.
+            string? currentNode;
+            if (currentRoutes.Exists(r => r.path == currentDescription))
+            {
+                (currentNode, currentDescription) = currentRoutes.First(r => r.path == currentDescription);
+            }
+            else
+            {
+                (currentNode, currentDescription) = currentRoutes.First();
+            }
 
             if (currentLine != currentDescription)
             {
