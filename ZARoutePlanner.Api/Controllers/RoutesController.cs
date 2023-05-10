@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ZARoutePlanner.Api.Services;
+using static ZARoutePlanner.Api.Errors.ErrorMessages;
 
 namespace ZARoutePlanner.Api.Controllers;
 
@@ -21,12 +22,12 @@ public class RoutesController : ControllerBase
 
         if (!node1Exists)
         {
-            ModelState.AddModelError(nameof(start), $"The specified station '{start}' does not exist.");
+            ModelState.AddModelError(nameof(start), StationDoesNotExistMessage(start));
         }
 
         if (!node2Exists)
         {
-            ModelState.AddModelError(nameof(destination), $"The specified station '{destination}' does not exist.");
+            ModelState.AddModelError(nameof(destination), StationDoesNotExistMessage(destination));
         }
 
         if (!ModelState.IsValid)
