@@ -4,6 +4,8 @@ public class Graph
 {
     private readonly HashSet<Node> _nodes = new();
 
+    public IEnumerable<Node> Nodes => _nodes;
+
     public void AddNode(string name)
     {
         var exists = _nodes.Contains(new Node(name));
